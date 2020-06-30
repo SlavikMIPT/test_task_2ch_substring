@@ -29,12 +29,12 @@ def execution_time_average(probes=1):
                 gen_str = gen_func()
                 start_time = process_time_ns()
                 # Additional probes to equalize the number of operations
-                for j in range(max_str_len // len(gen_str)):
+                for _ in range(max_str_len // len(gen_str)):
                     func(gen_str)
                     total_probes += 1
                 time_acc += process_time_ns() - start_time
                 n += len(gen_str)
-            n = n // probes
+            n //= probes
             t = time_acc / total_probes
             return n, total_probes, t
 
